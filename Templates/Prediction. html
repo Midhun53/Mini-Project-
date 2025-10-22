@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fraud Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Fraud Prediction Dashboard</h2>
+    <form action="/predict" method="post">
+      <label>Amount:</label>
+      <input type="text" name="amount" required><br>
+
+      <label>Time Gap (hours):</label>
+      <input type="text" name="time_gap" required><br>
+
+      <label>Age:</label>
+      <input type="text" name="age" required><br>
+
+      <label>Country_IN (1/0):</label>
+      <input type="text" name="country_in" required><br>
+
+      <label>Device_Mobile (1/0):</label>
+      <input type="text" name="device_mobile" required><br>
+
+      <label>Device_Tablet (1/0):</label>
+      <input type="text" name="device_tablet" required><br>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+      <div class="result">{{ prediction_text }}</div>
+    {% endif %}
+
+    <div class="links">
+      <a href="/chart">📊 View Chart</a> |
+      <a href="/performance">📈 Performance</a> |
+      <a href="/preview">🧾 Preview Data</a>
+    </div>
+  </div>
+</body>
+</html>
