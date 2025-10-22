@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Model Performance</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Model Evaluation Metrics</h2>
+    <table border="1" align="center" cellpadding="10">
+      <tr><th>Metric</th><th>Score (%)</th></tr>
+      <tr><td>Accuracy</td><td>{{ accuracy }}</td></tr>
+      <tr><td>Precision</td><td>{{ precision }}</td></tr>
+      <tr><td>Recall</td><td>{{ recall }}</td></tr>
+      <tr><td>F1-Score</td><td>{{ f1 }}</td></tr>
+    </table>
+    <br>
+    <a href="/prediction">⬅ Back to Dashboard</a>
+  </div>
+</body>
+</html>
