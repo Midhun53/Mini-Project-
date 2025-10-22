@@ -1,0 +1,39 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import random
+import os
+
+@app.route("/chart")
+def chart():
+    # Sample transaction dataset
+    data = {
+        "Account_Age": [random.randint(1, 10) for _ in range(10)],
+        "Transaction_Amount": [round(random.uniform(100, 2000), 2) for _ in range(10)],
+        "Quality_Score": [random.randint(1, 5) for _ in range(10)],
+        "Price": [round(random.uniform(50, 500), 2) for _ in range(10)],
+        "Fraud_Status": [random.choice(["Fake", "Real"]) for _ in range(10)]
+    }
+
+    df = pd.DataFrame(data)
+
+    # Assign colors based on Fraud Status
+    colors = ["red" if x == "Fake" else "green" for x in df["Fraud_Status"]]
+
+    plt.figure(figsize=(8, 5))
+    plt.scatter(df["Transaction_Amount"], df["Price"], s=df["Account_Age"]*40,
+                c=colors, alpha=0.7, edgecolors='black')
+    plt.title("Account & Transaction Analysis")
+    plt.xlabel("Transaction Amount")
+    plt.ylabel("Price")
+    plt.grid(True)
+    plt.legend(handles=[
+        plt.Line2D([], [], color='red', marker='o', linestyle='', label='Fake'),
+        plt.Line2D([], [], color='green', marker='o', linestyle='', label='Real')
+    ], loc="best")
+
+    # Save chart to static folder
+    chart_path = os.path.join("static", "chart.png")
+    plt.savefig(chart_path)
+    plt.close()
+
+    return render_template("chart.html")
